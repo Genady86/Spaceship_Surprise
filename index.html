@@ -1,22 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-<title>Traumschiff Surprise</title>
-<script src="script.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-</head>
+        <title>Traumschiff Surprise</title>
 
-<body>
+        <link rel="stylesheet" href="style.css">
 
-<main>
-<h1>Das Traumschiff Surprise</h1>
-</main>
+    </head>
+
+    <body>
+
+        <main>
+            <h1>Das Traumschiff Surprise</h1>
+            <p class="hinweis">
+                Versorge und Prüfe dein Raumschiff mit den Buttons.
+            </p>
+            <!-- Für die Statustabelle füllt Javascript das jetzt mit renderStatus -->
+            <section id="status"></section>
+            <section class="steuerung" id="steuerung">
+                <h2>Schaden</h2>
+
+                <label for="damageInput">Höhe des Schadens:</label> <!-- Eingabefeld -->
+                <input id="damageInput" type="number" min="1" value="20">
+                <!-- Id für js, type sind nur zahlen erlaubt, min kleinster wert, value = startkapital -->
+                <button onclick="takeDamage()">
+                    Schaden nehmen
+                </button>
+            </section>
+            <!-- Repairkit kaufen: Eingabefeld + Button  -->
+            <section class="steuerung">
+                <h2>Repairkits kaufen</h2>
+
+                <label for="repairkitInput">Anzahl der Repairkits:</label>
+                <input id="repairkitInput" type="number" min="1" value="1">
+
+                <button onclick="buyRepairkits()">
+                    Repairkits kaufen
+                </button>
+            </section>
+
+            <button onclick="useRepairkit()"> <!--  Ein Repairkit  benutzen -->
+                Ein Repairkit benutzen
+            </button>
 
 
-</body>
+            <p id="meldung" aria-live="polite">
+                <!-- aria-live="polite" Vorlese-Programm liest den Text neu, wenn es Zeit hat -->
+                Das Raumschiff ist bereit.
+            </p>
+
+            <p id="error" aria-live="assertive"></p> <!-- aria-live="assertive" unterbricht bei fehler -->
+        </main>
+        <script src="script.js"></script>
+    </body>
+
 
 </html>
