@@ -1,117 +1,278 @@
-/*Regel für alle Elemente*/
+  /* 1. Grundregeln */
+
+:root {
+  --hintergrund: #070b1a;
+  --flaeche: #111936;
+  --flaeche-hell: #19244b;
+  --rahmen: #345a91;
+  --akzent: #64c8ff;
+  --akzent-hell: #b4ecff;
+  --text: #f4f8ff;
+  --text-leise: #b8c4de;
+  --erfolg: #62e6a7;
+  --fehler: #ff98a8;
+  --warnung: #ff5d74;
+}
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-/*Ganze Seite*/
 body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 40px 20px;
-    background-color: #0b1026;
-    /*Weltraumblau*/color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    transition:            background-color 0.3s,                box-shadow 0.3s;        /*Farbwechselfür0,3secstattSprung*/
-  
+  min-height: 100vh;
+  margin: 0;
+  padding: 40px 20px;
+  background:
+    radial-gradient(circle at 15% 10%, #19305c 0, transparent 32%),
+    radial-gradient(circle at 85% 80%, #152750 0, transparent 30%),
+    var(--hintergrund);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-body.zerstoert {                                                                         /*Aussehen bei Zerstörung*/
-    background-color: #650b18;                                                         /*Dunkelrot anstatt Blau*/
-    box-shadow: inset 0 0 100px #ff1f3d;                                               /*inset Schatten nach innen und Glühen*/
+button,
+input {
+  font: inherit;
 }
 
-.zerstoert h1::after {
-    content: " - Zerstört";
-    color: #ff6479;
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--akzent-hell);
+  outline-offset: 3px;
 }
 
-main {                                                                                  /*Hauptbereich*/
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
+/* 2. Hauptbereich und Überschrift */
+.app {
+  width: min(100%, 900px);
+  margin: 0 auto;
+}
+
+.app-header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.kennung {
+  margin: 0 0 8px;
+  color: var(--erfolg);
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.18em;
 }
 
 h1 {
-    color: #6ab7ff;
+  margin: 0;
+  color: var(--akzent-hell);
+  font-size: clamp(2rem, 6vw, 3.6rem);
 }
 
 h2 {
-    margin-top: 0;
-    font-size: 1.2rem;
-    color: #8dccff;
+  margin: 0 0 16px;
+  color: var(--akzent-hell);
+  font-size: 1.2rem;
 }
 
 .hinweis {
-    margin-bottom: 30px;
-    color: #b8c1dd;
+  max-width: 620px;
+  margin: 12px auto 0;
+  color: var(--text-leise);
 }
 
-.status-tabelle {                                                                           /*Statustabelle*/
-    width: 100%;
-    margin-bottom: 30px;
-    border-collapse: collapse;
+/* 3. Status und Inventar */
+
+.status {
+  margin-bottom: 24px;
+  overflow: hidden;
+  border: 1px solid var(--rahmen);
+  border-radius: 16px;
+  background-color: rgba(17, 25, 54, 0.94);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
 }
 
-.status-tabelle th,                                                                            /*Komma spricht beide regeln gleichzeitig an*/
+.status-tabelle {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.status-tabelle th,
 .status-tabelle td {
-    padding: 12px;
-    border: 1px solid #6ab7ff;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--rahmen);
+  text-align: left;
 }
 
-.status-tabelle th {
-    background-color: #1c2a52;
+.status-tabelle thead th {
+  background-color: var(--flaeche-hell);
+  color: var(--akzent-hell);
+  text-align: center;
 }
 
-.status-tabelle td:first-child {
-    font-weight: bold;
-    text-align: left;
+.status-tabelle tbody th {
+  width: 42%;
+  color: var(--text-leise);
 }
 
-.steuerung {                                                                                    /*Eingabefeld mit Button*/
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid #33477c;
-    border-radius: 12px;
-    background-color: #151d3b;
+.inventar-anzeige {
+  padding: 18px;
 }
 
-input {                                                                                         /*Eingabefeld*/
-    width: 100px;
-    margin: 10px;
-    padding: 10px;
-    border: 2px solid #6ab7ff;
-    border-radius: 6px;
+.inventar-anzeige h2 {
+  margin-bottom: 8px;
 }
 
+.inventar-anzeige p {
+  margin: 0;
+  color: var(--erfolg);
+  overflow-wrap: anywhere;
+}
 
+/* 4. Steuerung */
+
+.steuerungs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.steuerung {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px;
+  border: 1px solid var(--rahmen);
+  border-radius: 14px;
+  background-color: rgba(17, 25, 54, 0.94);
+}
+
+.steuerung label {
+  margin-bottom: 7px;
+  color: var(--text-leise);
+}
+
+.steuerung input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 11px 12px;
+  border: 2px solid var(--rahmen);
+  border-radius: 8px;
+  background-color: #080e21;
+  color: var(--text);
+}
+
+.steuerungs-text {
+  flex-grow: 1;
+  margin: 0 0 15px;
+  color: var(--text-leise);
+}
 
 button {
-    padding: 12px 18px;
-    border: 2px solid #6ab7ff;
-    border-radius: 8px;
-
-    background-color: #1c2a52;
-    color: white;
-    cursor: pointer;
+  padding: 11px 14px;
+  border: 2px solid var(--akzent);
+  border-radius: 9px;
+  background-color: var(--akzent);
+  color: #05101f;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
 }
 
 button:hover {
-    background-color: #6ab7ff;
-    color: #0b1026;
+  background-color: var(--akzent-hell);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.sekundaer {
+  margin-top: 9px;
+  background-color: transparent;
+  color: var(--akzent-hell);
+}
+
+.reset-button {
+  display: block;
+  margin: 18px auto 0;
+  border-color: var(--text-leise);
+  background-color: transparent;
+  color: var(--text-leise);
+}
+
+/* 5. Meldungen und Zerstörungszustand */
+
+.meldungsbereich {
+  margin-top: 20px;
+  padding: 16px 18px;
+  border: 1px solid var(--rahmen);
+  border-radius: 12px;
+  background-color: rgba(17, 25, 54, 0.94);
 }
 
 #meldung {
-    margin-top: 25px;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: #151d3b;
+  margin: 0;
+  color: var(--erfolg);
 }
 
 #error {
-    min-height: 24px;
-    color: #ff9ca9;
-    font-weight: bold;
+  min-height: 1.4em;
+  margin: 8px 0 0;
+  color: var(--fehler);
+  font-weight: bold;
+}
+
+body.zerstoert {
+  background-color: #3d0711;
+  box-shadow: inset 0 0 140px rgba(255, 30, 65, 0.5);
+}
+
+.zerstoert h1::after {
+  content: " - Zerstört";
+  color: var(--warnung);
+}
+
+/* 6. Responsive Darstellung */
+
+@media (max-width: 760px) {
+  body {
+    padding: 24px 14px;
+  }
+
+  .steuerungs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .status-tabelle th,
+  .status-tabelle td {
+    padding: 11px 10px;
+  }
+
+  .steuerung {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
 }
 
 
+#status {
+    /* Estilos para #status */
+}
 
+#damageInput {
+    /* Estilos para #damageInput */
+}
+
+#repairkitInput {
+    /* Estilos para #repairkitInput */
+}

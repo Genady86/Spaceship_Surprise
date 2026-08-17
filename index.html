@@ -1,61 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Traumschiff Surprise</title>
+    <title>Traumschiff Surprise</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
 
-        <link rel="stylesheet" href="style.css">
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <p class="kennung">MISSION CONTROL</p>
+        <h1>Das Traumschiff Surprise</h1>
+        <p class="hinweis">
+          Verwalte dein Raumschiff, kaufe Ausrüstung und überstehe den Flug.
+        </p>
+      </header>
+      <!-- Javascript fügt die Tabelle hier ein -->
+      <section id="status" class="status" aria-label="Raumschiffstatus"></section>
 
-    </head>
+      <div class="steuerungs-grid">
+        <section class="steuerung">
+          <h2>Schaden</h2>
+          <label for="damageInput">Höhe des Schadens</label>
+          <input id="damageInput" type="number" min="1" step="1" value="20">
+          <button type="button" onclick="takeDamage()">
+            Schaden nehmen
+          </button>
+        </section>
 
-    <body>
+        <section class="steuerung">
+          <h2>Repairkits</h2>
+          <label for="repairkitInput">Anzahl der Repairkits</label>
+          <input id="repairkitInput" type="number" min="1" step="1" value="1">
+          <button type="button" onclick="buyRepairkits()">
+            Repairkits kaufen
+          </button>
+          <button type="button" class="sekundaer" onclick="useRepairkit()">
+            Ein Repairkit benutzen
+          </button>
+        </section>
 
-        <main>
-            <h1>Das Traumschiff Surprise</h1>
-            <p class="hinweis">
-                Versorge und Prüfe dein Raumschiff mit den Buttons.
-            </p>
-            <!-- Für die Statustabelle füllt Javascript das jetzt mit renderStatus -->
-            <section id="status"></section>
-            <section class="steuerung" id="steuerung">
-                <h2>Schaden</h2>
+        <section class="steuerung">
+          <h2>Schutzschild</h2>
+          <p class="steuerungs-text">
+            Ein Schild kostet 50 Diamonds und halbiert erlittenen Schaden.
+          </p>
+          <button type="button" onclick="buyShield()">
+            Schild kaufen
+          </button>
+        </section>
+      </div>
 
-                <label for="damageInput">Höhe des Schadens:</label> <!-- Eingabefeld -->
-                <input id="damageInput" type="number" min="1" value="20">
-                <!-- Id für js, type sind nur zahlen erlaubt, min kleinster wert, value = startkapital -->
-                <button onclick="takeDamage()">
-                    Schaden nehmen
-                </button>
-            </section>
-            <!-- Repairkit kaufen: Eingabefeld + Button  -->
-            <section class="steuerung">
-                <h2>Repairkits kaufen</h2>
+      <section class="meldungsbereich" aria-label="Meldungen">
+        <p id="meldung" aria-live="polite">
+          Das Raumschiff ist bereit.
+        </p>
+        <p id="error" role="alert" aria-live="assertive"></p>
+      </section>
 
-                <label for="repairkitInput">Anzahl der Repairkits:</label>
-                <input id="repairkitInput" type="number" min="1" value="1">
+      <button type="button" class="reset-button" onclick="resetGame()">
+        Spiel zurücksetzen
+      </button>
+    </main>
 
-                <button onclick="buyRepairkits()">
-                    Repairkits kaufen
-                </button>
-            </section>
-
-            <button onclick="useRepairkit()"> <!--  Ein Repairkit  benutzen -->
-                Ein Repairkit benutzen
-            </button>
-
-
-            <p id="meldung" aria-live="polite">
-                <!-- aria-live="polite" Vorlese-Programm liest den Text neu, wenn es Zeit hat -->
-                Das Raumschiff ist bereit.
-            </p>
-
-            <p id="error" aria-live="assertive"></p> <!-- aria-live="assertive" unterbricht bei fehler -->
-        </main>
-        <script src="script.js"></script>
-    </body>
-
+    <script src="script.js"></script>
+  </body>
 
 </html>
